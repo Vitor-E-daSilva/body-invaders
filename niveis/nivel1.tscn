@@ -6,4 +6,4 @@
 texture_filter = 1
 
 [node name="Jogador" parent="." unique_id=887796295 instance=ExtResource("1_61e0j")]
-position = Vector2(159, 97)
+position = Vector2(236, 129)

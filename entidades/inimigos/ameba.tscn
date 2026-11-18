@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dhaddthevv6a7"]
+
+[ext_resource type="Texture2D" uid="uid://dx10jpckv7q87" path="res://recursos/graficos/inimigo_3.png" id="1_e1560"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n3e6u"]
+radius = 8.062258
+
+[node name="Ameba" type="CharacterBody2D" unique_id=1473578534]
+
+[node name="SpriteAmeba" type="Sprite2D" parent="." unique_id=308214919]
+texture = ExtResource("1_e1560")
+
+[node name="ColisaoAmeba" type="CollisionShape2D" parent="." unique_id=196352088]
+shape = SubResource("CircleShape2D_n3e6u")

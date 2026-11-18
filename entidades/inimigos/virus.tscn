@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dyoce1pbj2lrl"]
+
+[ext_resource type="Script" uid="uid://c713hjxivxvfe" path="res://entidades/inimigos/virus.gd" id="1_dp6oe"]
+[ext_resource type="Texture2D" uid="uid://ci4vaj728og5k" path="res://recursos/graficos/inimigo_1.png" id="2_v8awd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n3e6u"]
+radius = 6.0
+
+[node name="Virus" type="CharacterBody2D" unique_id=1522634732]
+collision_layer = 4
+collision_mask = 27
+script = ExtResource("1_dp6oe")
+
+[node name="SpriteVirus" type="Sprite2D" parent="." unique_id=933229385]
+texture = ExtResource("2_v8awd")
+
+[node name="ColisaoVirus" type="CollisionShape2D" parent="." unique_id=2131088007]
+shape = SubResource("CircleShape2D_n3e6u")

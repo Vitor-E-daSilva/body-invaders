@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cy3qujxjxj43e"]
 
-[ext_resource type="Script" uid="uid://ds6htwpihlpay" path="res://entidades/inimigos/bacteria.gd" id="1_75wqw"]
+[ext_resource type="Script" uid="uid://c713hjxivxvfe" path="res://entidades/inimigos/inimigo.gd" id="1_75wqw"]
 [ext_resource type="Texture2D" uid="uid://b0cdt46er61fx" path="res://recursos/graficos/inimigo_4.png" id="1_k7exq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n3e6u"]
@@ -16,3 +16,8 @@ texture = ExtResource("1_k7exq")
 
 [node name="ColisaoBacteria" type="CollisionShape2D" parent="." unique_id=512916249]
 shape = SubResource("CircleShape2D_n3e6u")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1019693746]
+position = Vector2(0, 8)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

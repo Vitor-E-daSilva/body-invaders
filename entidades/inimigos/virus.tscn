@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dyoce1pbj2lrl"]
 
-[ext_resource type="Script" uid="uid://c713hjxivxvfe" path="res://entidades/inimigos/virus.gd" id="1_dp6oe"]
+[ext_resource type="Script" uid="uid://c713hjxivxvfe" path="res://entidades/inimigos/inimigo.gd" id="1_dp6oe"]
 [ext_resource type="Texture2D" uid="uid://ci4vaj728og5k" path="res://recursos/graficos/inimigo_1.png" id="2_v8awd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n3e6u"]
@@ -17,4 +17,8 @@ texture = ExtResource("2_v8awd")
 [node name="ColisaoVirus" type="CollisionShape2D" parent="." unique_id=2131088007]
 shape = SubResource("CircleShape2D_n3e6u")
 
+[node name="Marker2D" type="Marker2D" parent="." unique_id=490457721]
+position = Vector2(0, 8)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

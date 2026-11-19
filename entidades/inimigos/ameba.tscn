@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://dhaddthevv6a7"]
 
+[ext_resource type="Script" uid="uid://c713hjxivxvfe" path="res://entidades/inimigos/inimigo.gd" id="1_aqsbk"]
 [ext_resource type="Texture2D" uid="uid://dx10jpckv7q87" path="res://recursos/graficos/inimigo_3.png" id="1_e1560"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n3e6u"]
@@ -8,9 +9,15 @@ radius = 8.062258
 [node name="Ameba" type="Area2D" unique_id=149393599]
 collision_layer = 4
 collision_mask = 27
+script = ExtResource("1_aqsbk")
 
 [node name="SpriteAmeba" type="Sprite2D" parent="." unique_id=308214919]
 texture = ExtResource("1_e1560")
 
 [node name="ColisaoAmeba" type="CollisionShape2D" parent="." unique_id=196352088]
 shape = SubResource("CircleShape2D_n3e6u")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1370248090]
+position = Vector2(0, 8)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

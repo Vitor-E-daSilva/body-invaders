@@ -1,23 +1,49 @@
 [gd_scene format=3 uid="uid://dhaddthevv6a7"]
 
 [ext_resource type="Script" uid="uid://c713hjxivxvfe" path="res://entidades/inimigos/inimigo.gd" id="1_aqsbk"]
-[ext_resource type="Texture2D" uid="uid://dx10jpckv7q87" path="res://recursos/graficos/inimigo_3.png" id="1_e1560"]
+[ext_resource type="Texture2D" uid="uid://dbbi86ghcrpfn" path="res://recursos/graficos/itens_ameba/ameba_1.png" id="2_sti2q"]
+[ext_resource type="Texture2D" uid="uid://gj6pdetg4gwb" path="res://recursos/graficos/itens_ameba/ameba_2.png" id="3_86b46"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n3e6u"]
 radius = 8.062258
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kcoiq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_sti2q")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_sti2q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_86b46")
+}],
+"loop": 1,
+"name": &"mover",
+"speed": 5.0
+}]
 
 [node name="Ameba" type="Area2D" unique_id=149393599]
 collision_layer = 4
 collision_mask = 27
 script = ExtResource("1_aqsbk")
 
-[node name="SpriteAmeba" type="Sprite2D" parent="." unique_id=308214919]
-texture = ExtResource("1_e1560")
-
 [node name="ColisaoAmeba" type="CollisionShape2D" parent="." unique_id=196352088]
 shape = SubResource("CircleShape2D_n3e6u")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1370248090]
 position = Vector2(0, 8)
+
+[node name="AnimatedSpriteAmeba" type="AnimatedSprite2D" parent="." unique_id=1064615534]
+sprite_frames = SubResource("SpriteFrames_kcoiq")
+animation = &"mover"
+frame = 1
+frame_progress = 0.4103351
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

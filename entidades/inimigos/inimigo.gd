@@ -15,7 +15,7 @@ signal morreu(enemy: InimigoBase, pontos: int)
 @export var projetil: PackedScene
 
 # Variaveis de aparencia/fisica
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var sprite: AnimatedSprite2D = $"AnimatedSprite2D"
 @onready var hurtbox: CollisionShape2D = $CollisionShape2D
 @onready var marcador: Marker2D = $Marker2D
 
@@ -34,19 +34,39 @@ func tomar_dano(quantia : int) -> void:
 		return
 	
 	_vida -= quantia
-	if _vida < 0:
+	if _vida > 0:
+		_flash_acerto()
+	else:
 		_morte()
+
+func avancar_frame_animacao() -> void:
+	if _morto or sprite.animation != &"mover":
+		return
+	
+	var total_frames: int = sprite.sprite_frames.get_frame_count(&"mover")
+	if total_frames > 0:
+		sprite.frame = (sprite.frame +1) % total_frames
+		
 
 func atacar() -> void:
 	if _morto or not pode_atacar or projetil == null:
 		return
 	pass
 
-func _morte() -> void:
-	
+func _flash_acerto() -> void:
+	var tween : Tween = create_tween()
+	sprite.modulate = Color(2.5,2.5,1.0)
+	tween.tween_property(sprite,"modulate", Color.WHITE, 0.1)
+
+func _morte() -> void:	
 	_morto = true
 	hurtbox.set_deferred("Disabled", true)
 	
 	# Emite o sinal de morte
 	morreu.emit(self, valor_pontos)
-	queue_free()
+	
+	if sprite.sprite_frames.has_animation(&"morte"):
+		sprite.play(&"morte")
+		sprite.animation_finished.connect(queue_free, CONNECT_ONE_SHOT)
+	else:
+		queue_free()

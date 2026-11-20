@@ -2,6 +2,30 @@
 
 [ext_resource type="Script" uid="uid://c713hjxivxvfe" path="res://entidades/inimigos/inimigo.gd" id="1_dp6oe"]
 [ext_resource type="Texture2D" uid="uid://ci4vaj728og5k" path="res://recursos/graficos/inimigo_1.png" id="2_v8awd"]
+[ext_resource type="Texture2D" uid="uid://csgvqvjk3kws2" path="res://recursos/graficos/itens_virus/virus_1.png" id="3_3ryh7"]
+[ext_resource type="Texture2D" uid="uid://brxbwy7u77qkd" path="res://recursos/graficos/itens_virus/virus_2.png" id="4_iu3di"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uxiae"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_v8awd")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_3ryh7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_iu3di")
+}],
+"loop": 1,
+"name": &"mover",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n3e6u"]
 radius = 6.0
@@ -11,8 +35,9 @@ collision_layer = 4
 collision_mask = 27
 script = ExtResource("1_dp6oe")
 
-[node name="SpriteVirus" type="Sprite2D" parent="." unique_id=933229385]
-texture = ExtResource("2_v8awd")
+[node name="AnimatedSpriteVirus" type="AnimatedSprite2D" parent="." unique_id=596505699]
+sprite_frames = SubResource("SpriteFrames_uxiae")
+animation = &"mover"
 
 [node name="ColisaoVirus" type="CollisionShape2D" parent="." unique_id=2131088007]
 shape = SubResource("CircleShape2D_n3e6u")

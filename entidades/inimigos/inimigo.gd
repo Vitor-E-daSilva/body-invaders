@@ -51,7 +51,11 @@ func avancar_frame_animacao() -> void:
 func atacar() -> void:
 	if _morto or not pode_atacar or projetil == null:
 		return
-	pass
+
+	var projetil_var: Node2D = projetil.instantiate()
+	projetil_var.top_level = true
+	projetil_var.global_position = marcador.global_position
+	add_child(projetil_var)
 
 func _flash_acerto() -> void:
 	var tween : Tween = create_tween()

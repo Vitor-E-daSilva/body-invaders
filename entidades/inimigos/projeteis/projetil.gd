@@ -2,12 +2,12 @@ class_name ProjetilInimigo
 extends Area2D
 
 # Variaveis padrao
-@export var velocidade: float = 300
+@export var velocidade: float = 150
 @export var dano: int = 1
 
 # Nodes necessarios
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var notificaco_tela: VisibleOnScreenNotifier2D = %VisibleOnScreenNotifier2D
+@onready var notificaco_tela: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 
 var _acertou: bool = false
 

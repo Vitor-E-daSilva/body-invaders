@@ -2,6 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://c0fk74my3dixv" path="res://entidades/jogador.tscn" id="1_61e0j"]
 [ext_resource type="Texture2D" uid="uid://cnbgmkja1bxsm" path="res://recursos/icon.svg" id="2_tphtr"]
+[ext_resource type="PackedScene" uid="uid://cmvcwrqn6gast" path="res://entidades/inimigos/onda/onda.tscn" id="3_hbldr"]
+[ext_resource type="Resource" uid="uid://7isg14m8u6h2" path="res://entidades/inimigos/onda/layouts/onda_incial.tres" id="4_jamo6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e1560"]
 size = Vector2(62.5, 362)
@@ -34,3 +36,7 @@ texture = ExtResource("2_tphtr")
 
 [node name="ColisaoParede" type="CollisionShape2D" parent="Paredes/Parede2" unique_id=758301124]
 shape = SubResource("RectangleShape2D_e1560")
+
+[node name="Onda" parent="." unique_id=330034239 instance=ExtResource("3_hbldr")]
+position = Vector2(0, 30)
+layout = ExtResource("4_jamo6")

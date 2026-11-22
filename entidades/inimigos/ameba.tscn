@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dhaddthevv6a7"]
 
 [ext_resource type="Script" uid="uid://c713hjxivxvfe" path="res://entidades/inimigos/inimigo.gd" id="1_aqsbk"]
+[ext_resource type="PackedScene" uid="uid://nxxdt1ni8xbq" path="res://entidades/inimigos/projeteis/projetil_ameba.tscn" id="2_86b46"]
 [ext_resource type="Texture2D" uid="uid://dbbi86ghcrpfn" path="res://recursos/graficos/itens_ameba/ameba_1.png" id="2_sti2q"]
 [ext_resource type="Texture2D" uid="uid://gj6pdetg4gwb" path="res://recursos/graficos/itens_ameba/ameba_2.png" id="3_86b46"]
 
@@ -33,14 +34,16 @@ animations = [{
 collision_layer = 4
 collision_mask = 27
 script = ExtResource("1_aqsbk")
+pode_atacar = true
+projetil = ExtResource("2_86b46")
 
-[node name="ColisaoAmeba" type="CollisionShape2D" parent="." unique_id=196352088]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=196352088]
 shape = SubResource("CircleShape2D_n3e6u")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1370248090]
 position = Vector2(0, 8)
 
-[node name="AnimatedSpriteAmeba" type="AnimatedSprite2D" parent="." unique_id=1064615534]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1064615534]
 sprite_frames = SubResource("SpriteFrames_kcoiq")
 animation = &"mover"
 frame = 1

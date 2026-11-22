@@ -8,8 +8,10 @@
 [node name="ProjetilBacteria" type="Area2D" unique_id=196451973]
 script = ExtResource("1_qjq48")
 
-[node name="SpriteProjetil" type="Sprite2D" parent="." unique_id=104553109]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=104553109]
 texture = ExtResource("2_tpt1u")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1814740294]
 
 [node name="CollisaoProjetilBacteria" type="CollisionShape2D" parent="." unique_id=1387261703]
 scale = Vector2(0.2, 0.4)

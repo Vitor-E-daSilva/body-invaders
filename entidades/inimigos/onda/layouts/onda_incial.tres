@@ -7,7 +7,6 @@
 
 [resource]
 script = ExtResource("4_vid03")
-formacao_linhas = Array[String](["AAAAAAAAAAA", "BBBBBBBBBBB", "BBBBBBBBBBB", "VVVVVVVVVVV", "BBVVVVVVVAA"])
 paleta_inimigos = {
 "A": ExtResource("2_uuexu"),
 "B": ExtResource("3_oirtl"),

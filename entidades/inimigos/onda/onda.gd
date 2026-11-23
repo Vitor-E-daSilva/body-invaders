@@ -25,11 +25,13 @@ var _inimigos_iniciais: int = 0
 var _inimigos_vivos: int = 0
 var _atirador_anterior: InimigoBase
 
+# Configura os timers e chama o spawn da onda
 func _ready() -> void:
 	tempo_movimento.timeout.connect(_parada_tempo_movimento)
 	tempo_disparo.timeout.connect(_parada_tempo_disparo)
 	_spawn_onda()
 
+# Spawna onda usando o recurso
 func _spawn_onda() -> void:
 	if layout == null:
 		push_error("Layout de onda não encontrado")
@@ -85,6 +87,7 @@ func _spawn_onda() -> void:
 	tempo_movimento.start()
 	tempo_disparo.start()
 
+# Lida com o timer de movimento
 func _parada_tempo_movimento() -> void:
 	if _inimigos_vivos <= 0:
 		return
@@ -128,7 +131,8 @@ func _parada_tempo_movimento() -> void:
 			var inimigo: InimigoBase = _grid[coluna][linha]
 			if inimigo != null:
 				inimigo.avancar_frame_animacao()
-		
+
+# Lida com o timer de disparo
 func _parada_tempo_disparo() -> void:
 	if _inimigos_vivos <= 0:
 		return
@@ -153,9 +157,11 @@ func _parada_tempo_disparo() -> void:
 	_atirador_anterior = escolhido
 	escolhido.atacar()
 
+# Função auxiliar para selecionar inimigo aleatório
 func _escolher_atirador(atiradores: Array[InimigoBase]) -> InimigoBase:
 	return atiradores.pick_random()
 
+# Lida com morte de inimigos
 func _inimigo_morreu(_inimigo: InimigoBase, _pontos: int, coluna: int, linha: int) -> void:
 	_grid[coluna][linha] = null
 	_inimigos_vivos -= 1

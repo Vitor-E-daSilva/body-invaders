@@ -1,9 +1,42 @@
 [gd_scene format=3 uid="uid://co6qrkq04crse"]
 
 [ext_resource type="PackedScene" uid="uid://c0fk74my3dixv" path="res://entidades/jogador.tscn" id="1_61e0j"]
+[ext_resource type="Texture2D" uid="uid://cnbgmkja1bxsm" path="res://recursos/icon.svg" id="2_tphtr"]
+[ext_resource type="PackedScene" uid="uid://cmvcwrqn6gast" path="res://entidades/inimigos/onda/onda.tscn" id="3_hbldr"]
+[ext_resource type="Resource" uid="uid://7isg14m8u6h2" path="res://entidades/inimigos/onda/layouts/onda_incial.tres" id="4_jamo6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e1560"]
+size = Vector2(62.5, 362)
 
 [node name="Nivel1" type="Node2D" unique_id=351119694]
 texture_filter = 1
 
 [node name="Jogador" parent="." unique_id=887796295 instance=ExtResource("1_61e0j")]
-position = Vector2(236, 129)
+position = Vector2(167, 283)
+
+[node name="Paredes" type="Node2D" parent="." unique_id=1108869406]
+
+[node name="Parede" type="StaticBody2D" parent="Paredes" unique_id=1090062242]
+visible = false
+position = Vector2(-32, 181)
+
+[node name="SpriteBg" type="Sprite2D" parent="Paredes/Parede" unique_id=404978994]
+scale = Vector2(0.484375, 2.8359375)
+texture = ExtResource("2_tphtr")
+
+[node name="ColisaoParede" type="CollisionShape2D" parent="Paredes/Parede" unique_id=1879533144]
+shape = SubResource("RectangleShape2D_e1560")
+
+[node name="Parede2" type="StaticBody2D" parent="Paredes" unique_id=2013582664]
+position = Vector2(303, 182)
+
+[node name="SpriteBg" type="Sprite2D" parent="Paredes/Parede2" unique_id=1793643400]
+scale = Vector2(0.5, 2.8203127)
+texture = ExtResource("2_tphtr")
+
+[node name="ColisaoParede" type="CollisionShape2D" parent="Paredes/Parede2" unique_id=758301124]
+shape = SubResource("RectangleShape2D_e1560")
+
+[node name="Onda" parent="." unique_id=330034239 instance=ExtResource("3_hbldr")]
+position = Vector2(0, 30)
+layout = ExtResource("4_jamo6")

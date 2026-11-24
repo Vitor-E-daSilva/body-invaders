@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://b633oxpdyloep"]
+
+[ext_resource type="Script" uid="uid://b15n01ufscgi0" path="res://entidades/inimigos/projeteis/projetil.gd" id="1_qjq48"]
+[ext_resource type="Texture2D" uid="uid://daa2lwc7ic03o" path="res://recursos/graficos/itens_bacteria/projetil_bacteria.png" id="2_tpt1u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n3e6u"]
+
+[node name="ProjetilBacteria" type="Area2D" unique_id=196451973]
+script = ExtResource("1_qjq48")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=104553109]
+texture = ExtResource("2_tpt1u")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1814740294]
+
+[node name="CollisaoProjetilBacteria" type="CollisionShape2D" parent="." unique_id=1387261703]
+scale = Vector2(0.2, 0.4)
+shape = SubResource("RectangleShape2D_n3e6u")

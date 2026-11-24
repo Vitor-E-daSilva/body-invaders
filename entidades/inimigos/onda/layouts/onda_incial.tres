@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="LayoutOnda" format=3 uid="uid://7isg14m8u6h2"]
+
+[ext_resource type="PackedScene" uid="uid://dyoce1pbj2lrl" path="res://entidades/inimigos/virus.tscn" id="1_v02e3"]
+[ext_resource type="PackedScene" uid="uid://dhaddthevv6a7" path="res://entidades/inimigos/ameba.tscn" id="2_uuexu"]
+[ext_resource type="PackedScene" uid="uid://cy3qujxjxj43e" path="res://entidades/inimigos/bacteria.tscn" id="3_oirtl"]
+[ext_resource type="Script" uid="uid://bxrht81rvnn7j" path="res://entidades/inimigos/onda/layout_onda.gd" id="4_vid03"]
+
+[resource]
+script = ExtResource("4_vid03")
+paleta_inimigos = {
+"A": ExtResource("2_uuexu"),
+"B": ExtResource("3_oirtl"),
+"V": ExtResource("1_v02e3")
+}
+metadata/_custom_type_script = "uid://bxrht81rvnn7j"

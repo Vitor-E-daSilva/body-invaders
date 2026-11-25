@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dhaddthevv6a7"]
 
 [ext_resource type="Script" uid="uid://c713hjxivxvfe" path="res://entidades/inimigos/inimigo.gd" id="1_aqsbk"]
-[ext_resource type="PackedScene" uid="uid://nxxdt1ni8xbq" path="res://entidades/inimigos/projeteis/projetil_ameba.tscn" id="2_86b46"]
+[ext_resource type="PackedScene" uid="uid://nxxdt1ni8xbq" path="res://entidades/projeteis/projetil_ameba.tscn" id="2_86b46"]
 [ext_resource type="Texture2D" uid="uid://dbbi86ghcrpfn" path="res://recursos/graficos/itens_ameba/ameba_1.png" id="2_sti2q"]
 [ext_resource type="Texture2D" uid="uid://gj6pdetg4gwb" path="res://recursos/graficos/itens_ameba/ameba_2.png" id="3_86b46"]
 

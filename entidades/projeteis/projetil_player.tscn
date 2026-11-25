@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dinllcfcgkwpi"]
+
+[ext_resource type="Script" uid="uid://b15n01ufscgi0" path="res://entidades/projeteis/projetil.gd" id="1_ot1f0"]
+[ext_resource type="Texture2D" uid="uid://drktat3nrjg4w" path="res://recursos/graficos/itens_player/projetil_player.png" id="2_5orbf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n3e6u"]
+size = Vector2(4, 8)
+
+[node name="Projetil" type="Area2D" unique_id=78521927]
+collision_layer = 8
+collision_mask = 21
+script = ExtResource("1_ot1f0")
+metadata/_custom_type_script = "uid://b15n01ufscgi0"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=846138663]
+texture = ExtResource("2_5orbf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1076039463]
+shape = SubResource("RectangleShape2D_n3e6u")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=490473817]

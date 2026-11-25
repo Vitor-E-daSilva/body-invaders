@@ -1,12 +1,15 @@
 [gd_scene format=3 uid="uid://nxxdt1ni8xbq"]
 
-[ext_resource type="Script" uid="uid://b15n01ufscgi0" path="res://entidades/inimigos/projeteis/projetil.gd" id="1_82nyn"]
+[ext_resource type="Script" uid="uid://b15n01ufscgi0" path="res://entidades/projeteis/projetil.gd" id="1_82nyn"]
 [ext_resource type="Texture2D" uid="uid://ds3ugu7tk07qk" path="res://recursos/graficos/itens_ameba/projetil_ameba.png" id="2_pld5t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n3e6u"]
 
 [node name="ProjetilAmeba" type="Area2D" unique_id=196451973]
+collision_layer = 32
+collision_mask = 18
 script = ExtResource("1_82nyn")
+direcao = Vector2(0, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=104553109]
 texture = ExtResource("2_pld5t")

@@ -39,6 +39,7 @@ func tomar_dano(quantia : int) -> void:
 	else:
 		_morte()
 
+# Serve para manter animação de inimigos
 func avancar_frame_animacao() -> void:
 	if _morto or sprite.animation != &"mover":
 		return
@@ -57,6 +58,7 @@ func atacar() -> void:
 	projetil_var.global_position = marcador.global_position
 	add_child(projetil_var)
 
+# Usa uma tween para dar um flash básico de acerto
 func _flash_acerto() -> void:
 	var tween : Tween = create_tween()
 	sprite.modulate = Color(2.5,2.5,1.0)

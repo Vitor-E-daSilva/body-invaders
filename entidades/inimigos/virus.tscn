@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dyoce1pbj2lrl"]
 
 [ext_resource type="Script" uid="uid://c713hjxivxvfe" path="res://entidades/inimigos/inimigo.gd" id="1_dp6oe"]
+[ext_resource type="PackedScene" uid="uid://bxfhglrqapc26" path="res://entidades/projeteis/projetil_virus.tscn" id="2_iu3di"]
 [ext_resource type="Texture2D" uid="uid://ci4vaj728og5k" path="res://recursos/graficos/inimigo_1.png" id="2_v8awd"]
 [ext_resource type="Texture2D" uid="uid://csgvqvjk3kws2" path="res://recursos/graficos/itens_virus/virus_1.png" id="3_3ryh7"]
 [ext_resource type="Texture2D" uid="uid://brxbwy7u77qkd" path="res://recursos/graficos/itens_virus/virus_2.png" id="4_iu3di"]
@@ -34,10 +35,13 @@ radius = 6.0
 collision_layer = 4
 collision_mask = 27
 script = ExtResource("1_dp6oe")
+pode_atacar = true
+projetil = ExtResource("2_iu3di")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=596505699]
 sprite_frames = SubResource("SpriteFrames_uxiae")
 animation = &"mover"
+frame_progress = 0.16695029
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2131088007]
 shape = SubResource("CircleShape2D_n3e6u")

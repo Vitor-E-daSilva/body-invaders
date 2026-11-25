@@ -7,7 +7,7 @@ signal onda_venceu
 # Variaveis gloabais da onda
 @export var layout: LayoutOnda
 @export var margem_esquerda: float = 10.0
-@export var margem_direita: float = 246.0
+@export var margem_direita: float = 240.0
 @export var canto_y: float = 360
 @export var intervalo_minimo_movimento: float = 0.05
 
@@ -46,9 +46,9 @@ func _spawn_onda() -> void:
 	# Ajusta a grid para spawnar os inimigos
 	_grid.clear()
 	for col: int in range(_contador_coluna):
-		var arry_colunas: Array[InimigoBase] = []
-		arry_colunas.resize(_contador_coluna)
-		_grid.append(arry_colunas)
+		var array_colunas: Array[InimigoBase] = []
+		array_colunas.resize(_contador_coluna)
+		_grid.append(array_colunas)
 	
 	for linha: int in range(_contador_linha):
 		var linha_str: String = layout.formacao_linhas[linha]
@@ -130,6 +130,7 @@ func _parada_tempo_movimento() -> void:
 		for linha: int in range(_contador_linha):
 			var inimigo: InimigoBase = _grid[coluna][linha]
 			if inimigo != null:
+	
 				inimigo.avancar_frame_animacao()
 
 # Lida com o timer de disparo

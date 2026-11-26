@@ -1,11 +1,19 @@
 extends Node
 
+signal pontuacao_mudou(nova_pontuacao)
+signal maior_pontuacao_mudou(nova_pontuacao)
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+var _pontuacao: int = 0
+var _maior_pontuacao: int = 0
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func adicionar_pontos(pontos: int):
+	_pontuacao += pontos
+	pontuacao_mudou.emit(_pontuacao)
+	
+	if _pontuacao > _maior_pontuacao:
+		_maior_pontuacao = _pontuacao
+		maior_pontuacao_mudou.emit(_maior_pontuacao)
+		
+func resetar():
+	_pontuacao = 0
+	pontuacao_mudou.emit(_pontuacao)

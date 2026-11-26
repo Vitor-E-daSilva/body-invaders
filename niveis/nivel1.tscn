@@ -1,17 +1,24 @@
 [gd_scene format=3 uid="uid://co6qrkq04crse"]
 
 [ext_resource type="PackedScene" uid="uid://c0fk74my3dixv" path="res://entidades/jogador.tscn" id="1_61e0j"]
+[ext_resource type="Script" uid="uid://2ox31o520txe" path="res://niveis/nivel.gd" id="1_wbyj6"]
+[ext_resource type="Script" uid="uid://bxrht81rvnn7j" path="res://entidades/inimigos/onda/layout_onda.gd" id="2_0ik72"]
 [ext_resource type="PackedScene" uid="uid://cmvcwrqn6gast" path="res://entidades/inimigos/onda/onda.tscn" id="3_hbldr"]
 [ext_resource type="Resource" uid="uid://7isg14m8u6h2" path="res://entidades/inimigos/onda/layouts/onda_incial.tres" id="4_jamo6"]
 
 [node name="Nivel1" type="Node2D" unique_id=351119694]
 texture_filter = 1
+script = ExtResource("1_wbyj6")
+layouts = Array[ExtResource("2_0ik72")]([ExtResource("4_jamo6")])
 
 [node name="Jogador" parent="." unique_id=887796295 instance=ExtResource("1_61e0j")]
 position = Vector2(167, 283)
 
 [node name="Onda" parent="." unique_id=330034239 instance=ExtResource("3_hbldr")]
 position = Vector2(0, 30)
-layout = ExtResource("4_jamo6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1932662013]
+
+[node name="TimerSpawn" type="Timer" parent="." unique_id=2068324258]
+
+[node name="TimerDisparo" type="Timer" parent="." unique_id=2006083330]

@@ -3,6 +3,7 @@ extends Node2D
 
 signal onda_derotada
 signal onda_venceu
+signal adquiriu_pontos(pontos)
 
 # Variaveis gloabais da onda
 @export var layout: LayoutOnda
@@ -29,7 +30,6 @@ var _atirador_anterior: InimigoBase
 func _ready() -> void:
 	tempo_movimento.timeout.connect(_parada_tempo_movimento)
 	tempo_disparo.timeout.connect(_parada_tempo_disparo)
-	_spawn_onda()
 
 # Spawna onda usando o recurso
 func _spawn_onda() -> void:
@@ -173,5 +173,7 @@ func _inimigo_morreu(_inimigo: InimigoBase, _pontos: int, coluna: int, linha: in
 		onda_derotada.emit()
 		return
 	
+	adquiriu_pontos.emit(_pontos)
+	print(_pontos)
 	var media_restante: float = float(_inimigos_vivos) / float(_inimigos_iniciais)
 	tempo_movimento.wait_time  = maxf(intervalo_minimo_movimento, layout.intervalo_base_movimento * media_restante)

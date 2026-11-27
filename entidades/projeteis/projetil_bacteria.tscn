@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b633oxpdyloep"]
 
 [ext_resource type="Script" uid="uid://b15n01ufscgi0" path="res://entidades/projeteis/projetil.gd" id="1_qjq48"]
-[ext_resource type="Texture2D" uid="uid://daa2lwc7ic03o" path="res://recursos/graficos/itens_bacteria/projetil_bacteria.png" id="2_tpt1u"]
+[ext_resource type="Texture2D" uid="uid://bhte7xrtglvkw" path="res://recursos/graficos/itens_projeteis/projetil_bacteria_novo.png" id="2_gjv36"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n3e6u"]
 
@@ -12,7 +12,7 @@ script = ExtResource("1_qjq48")
 direcao = Vector2(0, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=104553109]
-texture = ExtResource("2_tpt1u")
+texture = ExtResource("2_gjv36")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1814740294]
 

@@ -4,6 +4,22 @@
 [ext_resource type="Texture2D" uid="uid://cxc0p7phy2hu7" path="res://recursos/player.png" id="2_g4vuw"]
 [ext_resource type="PackedScene" uid="uid://dinllcfcgkwpi" path="res://entidades/projeteis/projetil_player.tscn" id="2_xp4qg"]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_g4vuw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_g4vuw")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"morte",
+"speed": 5.0
+}]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_v7jj0"]
 radius = 6.708204
 
@@ -11,11 +27,12 @@ radius = 6.708204
 collision_layer = 2
 collision_mask = 37
 script = ExtResource("1_6n3k8")
+velocidade = 200.0
 projetil = ExtResource("2_xp4qg")
 
-[node name="SpriteJogador" type="Sprite2D" parent="." unique_id=1085590369]
+[node name="SpriteJogador" type="AnimatedSprite2D" parent="." unique_id=49899823]
 texture_filter = 1
-texture = ExtResource("2_g4vuw")
+sprite_frames = SubResource("SpriteFrames_g4vuw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1788998829]
 shape = SubResource("CircleShape2D_v7jj0")

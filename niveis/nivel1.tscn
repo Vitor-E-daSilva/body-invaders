@@ -39,7 +39,7 @@ scale = Vector2(1.3, 1)
 sprite_frames = SubResource("SpriteFrames_xp4qg")
 
 [node name="Jogador" parent="." unique_id=887796295 instance=ExtResource("1_61e0j")]
-position = Vector2(167, 283)
+position = Vector2(135, 320)
 
 [node name="Onda" parent="." unique_id=330034239 instance=ExtResource("3_hbldr")]
 position = Vector2(0, 30)

@@ -34,6 +34,7 @@ var _posicao_limite_onda: float = 100
 var _intervalo_spawn: float = 10 
 var _intervalo_disparo: float = 1
 var _vida_jogador: int
+var _pausado: bool = false
 
 
 func _ready() -> void:
@@ -56,6 +57,18 @@ func _ready() -> void:
 	jogador.jogador_morreu.connect(_derrota)
 	jogador.jogador_tomou_dano.connect(_jogador_perdeu_vida)
 	_vida_jogador = jogador.vida_max
+
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("sair"):
+		_pausar()
+
+func _pausar() -> void:
+	if not _pausado:
+		get_tree().paused = true
+		_pausado = true
+	else:
+		get_tree().paused = false
+		_pausado = false
 
 func _spawnar_onda() -> void:
 	if _onda_atual >= maximo_ondas:
@@ -106,12 +119,31 @@ func _parada_tempo_disparo() -> void:
 func _jogador_perdeu_vida(_vida_restante: int) -> void:
 	_vida_jogador =_vida_restante
 	_avancar_frame_animacao()
+	_respawnar_jogador()
 	
 func _avancar_frame_animacao() -> void:
+	var tween: Tween = create_tween()
+	background.modulate = Color.RED
+	tween.tween_property(background,"modulate", Color.WHITE, 1.0)
+	
 	var total_frames: int = background.sprite_frames.get_frame_count(&"default")
 	if total_frames > 0:
 		background.frame = (background.frame +1) % total_frames
 
+func _respawnar_jogador() -> void:
+	# Declara atributos
+	var tween: Tween = create_tween()
+	jogador.vulneravel = false
+	jogador.pode_mover = false
+	jogador.visible = false
+	jogador.position = Vector2(100,320)
+	
+	# Executa animação e retorna atributos oa normal
+	tween.tween_property(jogador,"visible", true, 0.5)
+	tween.tween_property(jogador,"position",Vector2(135,320),0.5)
+	jogador.pode_mover = true
+	jogador.vulneravel = true
+	
 func _derrota() -> void:
 	nivel_falho.emit()
 

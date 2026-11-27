@@ -10,9 +10,11 @@ signal jogador_tomou_dano(_vida_restante)
 @export var vida_max: int = 3
 @export var velocidade: float = 300.0
 @export var margem_borda: float = 16.0
+@export var pode_mover: bool = true
+@export var vulneravel: bool = true
 
 # Declaração de variaveis dos nós filhos
-@onready var sprite: Sprite2D = $SpriteJogador
+@onready var sprite: AnimatedSprite2D = $SpriteJogador
 @onready var marcador: Marker2D = $Marker2D
 @onready var hurtbox: CollisionShape2D = $CollisionShape2D
 
@@ -40,6 +42,9 @@ func _physics_process(_delta: float) -> void:
 
 #função que identifica se o jogador apertou para esquerda ou pra direita
 func _atualizar_movimento() -> void:
+	# Verificação de possibilidade de movimento
+	if not pode_mover:
+		return
 	#Se apertar Esquerda: direcao vale -1
 	#Se apertar Direita: direcao vale 1
 	var direcao: float = Input.get_axis("ui_left", "ui_right")
@@ -62,7 +67,7 @@ func atacar() -> void:
 
 # Função para receber hits
 func tomar_dano(quantia: int) -> void:
-	if _morto:
+	if _morto or not vulneravel:
 		return
 		
 	_vida -= quantia

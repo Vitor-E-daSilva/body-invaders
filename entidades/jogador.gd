@@ -2,6 +2,8 @@ class_name JogadorBase
 extends CharacterBody2D
 
 signal jogador_morreu()
+signal jogador_atacou()
+signal jogador_tomou_dano(_vida_restante)
 
 #variaveis do jogador
 #@export antes de var para aperecer no painel do inspetor do Godot
@@ -56,6 +58,7 @@ func atacar() -> void:
 	projetil_var.top_level = true
 	projetil_var.global_position = marcador.global_position
 	add_child(projetil_var)
+	jogador_atacou.emit()
 
 # Função para receber hits
 func tomar_dano(quantia: int) -> void:
@@ -67,11 +70,13 @@ func tomar_dano(quantia: int) -> void:
 		_flash_acerto()
 	else:
 		_morte()
+	
+	jogador_tomou_dano.emit(_vida)
 
 func _flash_acerto() -> void:
 	var tween : Tween = create_tween()
-	sprite.modulate = Color(2.5,2.5,1.0)
-	tween.tween_property(sprite,"modulate", Color.WHITE, 0.1)
+	sprite.modulate = Color(18.892, 0.0, 0.0, 1.0)
+	tween.tween_property(sprite,"modulate", Color.WHITE, 0.5)
 
 func _morte() -> void:	
 	_morto = true

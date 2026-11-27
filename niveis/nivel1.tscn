@@ -5,19 +5,44 @@
 [ext_resource type="Script" uid="uid://bxrht81rvnn7j" path="res://entidades/inimigos/onda/layout_onda.gd" id="2_0ik72"]
 [ext_resource type="PackedScene" uid="uid://cmvcwrqn6gast" path="res://entidades/inimigos/onda/onda.tscn" id="3_hbldr"]
 [ext_resource type="Resource" uid="uid://7isg14m8u6h2" path="res://entidades/inimigos/onda/layouts/onda_incial.tres" id="4_jamo6"]
+[ext_resource type="Texture2D" uid="uid://dvh1bhxywvocn" path="res://recursos/graficos/Background/vida_cheia/cerebro.png" id="6_8smc7"]
+[ext_resource type="Texture2D" uid="uid://db36un3fph3mh" path="res://recursos/graficos/Background/2_vidas/cerebro_2.png" id="7_fspq8"]
+[ext_resource type="Texture2D" uid="uid://dnnhihrwqwu4a" path="res://recursos/graficos/Background/1_vida/cerebro_3.png" id="8_j7q31"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xp4qg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_8smc7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_fspq8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_j7q31")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Nivel1" type="Node2D" unique_id=351119694]
 texture_filter = 1
 script = ExtResource("1_wbyj6")
-layouts = Array[ExtResource("2_0ik72")]([ExtResource("4_jamo6")])
+layouts_faceis = Array[ExtResource("2_0ik72")]([ExtResource("4_jamo6")])
+layouts_nedios = Array[ExtResource("2_0ik72")]([ExtResource("4_jamo6")])
+layouts_dificeis = Array[ExtResource("2_0ik72")]([ExtResource("4_jamo6")])
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1932662013]
+position = Vector2(135, 180)
+scale = Vector2(1.3, 1)
+sprite_frames = SubResource("SpriteFrames_xp4qg")
 
 [node name="Jogador" parent="." unique_id=887796295 instance=ExtResource("1_61e0j")]
 position = Vector2(167, 283)
 
 [node name="Onda" parent="." unique_id=330034239 instance=ExtResource("3_hbldr")]
 position = Vector2(0, 30)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1932662013]
 
 [node name="TimerSpawn" type="Timer" parent="." unique_id=2068324258]
 

@@ -54,9 +54,10 @@ func atacar() -> void:
 		return
 
 	var projetil_var: Node2D = projetil.instantiate()
-	projetil_var.top_level = true
-	projetil_var.global_position = marcador.global_position
-	add_child(projetil_var)
+	var container = get_tree().get_first_node_in_group("projeteis")
+	if container != null:
+		container.add_child(projetil_var)
+		projetil_var.global_position = marcador.global_position
 
 # Usa uma tween para dar um flash básico de acerto
 func _flash_acerto() -> void:

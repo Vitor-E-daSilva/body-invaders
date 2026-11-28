@@ -34,17 +34,15 @@ func _ready() -> void: #função para pegar a largura da tela. Roda uma única v
 
 #função que lê o teclado e aplica o movimento continuamente. Roda 60 vezes por segundo 
 func _physics_process(_delta: float) -> void:
-	_atualizar_movimento()
-	move_and_slide()
+	if pode_mover:
+		_atualizar_movimento()
+		move_and_slide()
 	_limitar_na_tela()
 	if Input.is_action_just_pressed("ataque"):
 		atacar()
 
 #função que identifica se o jogador apertou para esquerda ou pra direita
 func _atualizar_movimento() -> void:
-	# Verificação de possibilidade de movimento
-	if not pode_mover:
-		return
 	#Se apertar Esquerda: direcao vale -1
 	#Se apertar Direita: direcao vale 1
 	var direcao: float = Input.get_axis("ui_left", "ui_right")

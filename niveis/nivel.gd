@@ -4,17 +4,25 @@ extends Node
 signal nivel_concluido
 signal nivel_falho
 
-# Variaveis gerais
+## Grupos de export ##
+@export_group("Layouts de onda")
 @export var layouts_faceis: Array[LayoutOnda]
 @export var layouts_medios: Array[LayoutOnda]
 @export var layouts_dificeis: Array[LayoutOnda]
-@export var inimigo_bonus: PackedScene
+
+@export_group("Nivel")
 @export var maximo_ondas: float = 3
-@export var intervalo_base_disparo: int
+@export var intervalo_base_disparo_jogador: int = 1
 @export var escala_intervalo_movimento: float = 0.9 # Escala para diminuir o intervalo de acordo com a onda
 @export var escala_intervalo_disparo: float = 0.9
 
-# Declarações omready
+@export_group("Inimigo bonus")
+@export var inimigo_bonus: PackedScene
+@export var intervalo_spawn_inimigo_bonus: float = 30.0
+@export var chance_de_spawn: float = 80
+@export var tempo_vida: float = 25
+
+## Declarações omready ##
 @onready var background: AnimatedSprite2D = $AnimatedSprite2D
 @onready var onda: Onda = $Onda
 @onready var jogador: JogadorBase = $Jogador
@@ -22,41 +30,48 @@ signal nivel_falho
 @onready var tempo_disparo_jogador: Timer = $TimerDisparo
 @onready var tempo_spawn_jogador: Timer = $TimerSpawnJogador
 @onready var tempo_inimigo_bonus: Timer = $TimerBonus
+@onready var tempo_vida_inimigo_bonus: Timer = $TimerBonusVida
 @onready var tempo_movimento_inimigo_bonus: Timer = $TimerBonusMov
 
-# Variaveis internas
+## Variaveis internas ##
+# Pontução:
 var _pontuacao: int = 0
 var _maior_pontuacao: int
+# Onda:
 var _onda_atual: int = 1
 var _layout_anterior: LayoutOnda = null
 var _possiveis_layouts: Array[LayoutOnda] = []
-var _inimigo_bonus: InimigoBase = null
-var _chance_de_spawn: float = 80
+var _intervalo_spawn: float = 5
 var _posicao_onda: float # Junto com as debaixo definem eixo y de spawn da onda
 var _posicao_padrao_onda: float = 50 
 var _posicao_limite_onda: float = 100 
+# Jogador
 var _vida_jogador: int
-var _pausado: bool = false
-# Variaveis de inimigo bonus
-var _intervalo_spawn: float = 5 
-var _intervalo_disparo: float = 1
-var _intervalo_inimigo_bonus: float = 30.0
-var _intervalo_movimento_inimigo_bonus: float = 0.25
+var _pausado: bool = false 
+var _intervalo_disparo_jogador: float
+# Inimigo bônus:
+var _inimigo_bonus: InimigoBase = null
+var _intervalo_movimento_inimigo_bonus: float = 0.1
 var _direcao : int = 1
 var _margem_esquerda: int = 20
 var _margem_direita: int = 250
 
-
+## Função de load do nivel ##
 func _ready() -> void:
+	# Separa o intervalo base do intervalo interno
+	_intervalo_disparo_jogador = intervalo_base_disparo_jogador
+	
 	# Declaração dos parametros de timer
 	tempo_disparo_jogador.timeout.connect(_parada_tempo_disparo)
-	tempo_disparo_jogador.wait_time = _intervalo_disparo
+	tempo_disparo_jogador.wait_time = _intervalo_disparo_jogador
 	tempo_spawn.timeout.connect(_spawnar_onda)
 	tempo_spawn.wait_time = _intervalo_spawn
 	tempo_spawn_jogador.wait_time = 1
 	tempo_spawn_jogador.timeout.connect(_restaurar_jogador)
-	tempo_inimigo_bonus.wait_time = _intervalo_inimigo_bonus
+	tempo_inimigo_bonus.wait_time = intervalo_spawn_inimigo_bonus
 	tempo_inimigo_bonus.timeout.connect(_spawnar_inimigo_bonus)
+	tempo_vida_inimigo_bonus.timeout.connect(_despawnar_inimigo_bonus)
+	tempo_vida_inimigo_bonus.wait_time = tempo_vida
 	tempo_movimento_inimigo_bonus.wait_time = _intervalo_movimento_inimigo_bonus
 	tempo_movimento_inimigo_bonus.timeout.connect(_mover_inimigo_bonus)
 	
@@ -74,10 +89,12 @@ func _ready() -> void:
 	jogador.jogador_tomou_dano.connect(_jogador_perdeu_vida)
 	_vida_jogador = jogador.vida_max
 
+## Função de processo ##
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("sair"):
 		_pausar()
 
+## Autoesplicativa
 func _pausar() -> void:
 	if not _pausado:
 		get_tree().paused = true
@@ -86,6 +103,8 @@ func _pausar() -> void:
 		get_tree().paused = false
 		_pausado = false
 
+## Funções relacionadas a onda:
+# Spawn da onda
 func _spawnar_onda() -> void:
 	if _onda_atual >= maximo_ondas:
 		nivel_concluido.emit()
@@ -112,9 +131,11 @@ func _spawnar_onda() -> void:
 	onda._spawn_onda()
 	tempo_inimigo_bonus.start()
 
+# Seleção de layout da onda
 func _escolher_layout(layouts: Array[LayoutOnda]) -> LayoutOnda:
 	return layouts.pick_random()
 
+# Derrota da onda
 func _onda_derrotada() -> void:
 	_layout_anterior = onda.layout
 	_posicao_onda += 20
@@ -128,22 +149,35 @@ func _onda_derrotada() -> void:
 	print("Pontuação:", _pontuacao)
 	print("Maior:", _maior_pontuacao)
 
+## Funções de inimigo bonus (IB)
+
+# Spawn de IB
 func _spawnar_inimigo_bonus() -> void:
 	if _inimigo_bonus != null:
-		_inimigo_bonus.queue_free()
 		return
 		
-	if _chance_spawn(_chance_de_spawn):
-		print("A")
+	if _chance_spawn(chance_de_spawn):
 		_inimigo_bonus = inimigo_bonus.instantiate() as InimigoBase
 		_inimigo_bonus.position = Vector2(20,30)
 		add_child(_inimigo_bonus)
 		tempo_movimento_inimigo_bonus.start()
-	
+		tempo_vida_inimigo_bonus.start()
+		tempo_inimigo_bonus.stop()
 
+# Despawn de IB	
+func _despawnar_inimigo_bonus() -> void:
+	if _inimigo_bonus == null:
+		return
+	
+	_inimigo_bonus.queue_free()
+	tempo_vida_inimigo_bonus.stop()
+	tempo_inimigo_bonus.start()
+
+# Chance de spawn de IB
 func _chance_spawn(porcentagem:float) -> bool:
 	return randf()*100 < porcentagem
 
+# Movimento do IB
 func _mover_inimigo_bonus() -> void:
 	if _inimigo_bonus == null:
 		return
@@ -156,7 +190,10 @@ func _mover_inimigo_bonus() -> void:
 		
 	_inimigo_bonus.position.x += 5.0 * _direcao
 	_inimigo_bonus.avancar_frame_animacao()
-	
+
+## Funções jogador
+
+# Ativa delay de disparo
 func _ataque_jogador() -> void:
 	if jogador._morto:
 		return
@@ -164,15 +201,18 @@ func _ataque_jogador() -> void:
 	jogador.pode_atacar = false
 	tempo_disparo_jogador.start()
 
+# Reativa disparo
 func _parada_tempo_disparo() -> void:
 	jogador.pode_atacar = true
 	tempo_disparo_jogador.stop()
 
+# Captura vida do jogador
 func _jogador_perdeu_vida(_vida_restante: int) -> void:
 	_vida_jogador =_vida_restante
 	_avancar_frame_animacao()
 	_respawnar_jogador()
-	
+
+# Animação de dano ao jogador	
 func _avancar_frame_animacao() -> void:
 	var tween: Tween = create_tween()
 	background.modulate = Color.RED
@@ -182,6 +222,7 @@ func _avancar_frame_animacao() -> void:
 	if total_frames > 0:
 		background.frame = (background.frame +1) % total_frames
 
+# Auxiliar de animação de dano ao jogador
 func _respawnar_jogador() -> void:
 	if jogador._morto:
 		return
@@ -198,13 +239,15 @@ func _respawnar_jogador() -> void:
 	tempo_spawn_jogador.start()
 	tween.tween_property(jogador,"visible", true, 0.5)
 	tween.tween_property(jogador,"position",Vector2(135,320),0.5)
-	
+
+# Libera o jogador do estado de transe	
 func _restaurar_jogador() -> void:
 	jogador.pode_mover = true
 	jogador.vulneravel = true
 	jogador.pode_atacar = true
 	tempo_spawn_jogador.stop()
-	
+
+## Funções de nivel
 func _derrota() -> void:
 	nivel_falho.emit()
 

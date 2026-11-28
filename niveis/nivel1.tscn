@@ -29,13 +29,15 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Nivel1" type="Node2D" unique_id=351119694]
+[node name="Nivel1" type="Node2D" unique_id=351119694 groups=["projeteis"]]
 texture_filter = 1
 script = ExtResource("1_wbyj6")
 layouts_faceis = Array[ExtResource("2_0ik72")]([ExtResource("4_jamo6")])
 layouts_medios = Array[ExtResource("2_0ik72")]([ExtResource("4_j7q31")])
 layouts_dificeis = Array[ExtResource("2_0ik72")]([ExtResource("5_i0vtr")])
 inimigo_bonus = ExtResource("6_i0vtr")
+
+[node name="Projeteis" type="Node2D" parent="." unique_id=687819954 groups=["projeteis"]]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1932662013]
 position = Vector2(135, 180)
@@ -55,5 +57,7 @@ position = Vector2(0, 30)
 [node name="TimerSpawnJogador" type="Timer" parent="." unique_id=910163027]
 
 [node name="TimerBonus" type="Timer" parent="." unique_id=1020835090]
+
+[node name="TimerBonusVida" type="Timer" parent="." unique_id=1611033159]
 
 [node name="TimerBonusMov" type="Timer" parent="." unique_id=340366015]

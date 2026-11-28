@@ -7,9 +7,11 @@
 
 [node name="ProjetilVirus" type="Area2D" unique_id=196451973]
 collision_layer = 32
-collision_mask = 18
+collision_mask = 26
 script = ExtResource("1_2k6t7")
+velocidade = 50.0
 direcao = Vector2(0, 1)
+destrutivel = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=104553109]
 texture = ExtResource("2_2k6t7")

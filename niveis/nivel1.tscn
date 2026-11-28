@@ -4,8 +4,11 @@
 [ext_resource type="Script" uid="uid://2ox31o520txe" path="res://niveis/nivel.gd" id="1_wbyj6"]
 [ext_resource type="Script" uid="uid://bxrht81rvnn7j" path="res://entidades/inimigos/onda/layout_onda.gd" id="2_0ik72"]
 [ext_resource type="PackedScene" uid="uid://cmvcwrqn6gast" path="res://entidades/inimigos/onda/onda.tscn" id="3_hbldr"]
-[ext_resource type="Resource" uid="uid://7isg14m8u6h2" path="res://entidades/inimigos/onda/layouts/onda_incial.tres" id="4_jamo6"]
+[ext_resource type="Resource" uid="uid://dmscmdsmpnnrf" path="res://entidades/inimigos/onda/layouts/medios/onda_media.tres" id="4_j7q31"]
+[ext_resource type="Resource" uid="uid://7isg14m8u6h2" path="res://entidades/inimigos/onda/layouts/faceis/onda_incial.tres" id="4_jamo6"]
+[ext_resource type="Resource" uid="uid://da0faae7fmlpc" path="res://entidades/inimigos/onda/layouts/dificeis/onda_dificil.tres" id="5_i0vtr"]
 [ext_resource type="Texture2D" uid="uid://dvh1bhxywvocn" path="res://recursos/graficos/Background/vida_cheia/cerebro.png" id="6_8smc7"]
+[ext_resource type="PackedScene" uid="uid://c2sw73dbjho17" path="res://entidades/inimigos/protozoario.tscn" id="6_i0vtr"]
 [ext_resource type="Texture2D" uid="uid://db36un3fph3mh" path="res://recursos/graficos/Background/2_vidas/cerebro_2.png" id="7_fspq8"]
 [ext_resource type="Texture2D" uid="uid://dnnhihrwqwu4a" path="res://recursos/graficos/Background/1_vida/cerebro_3.png" id="8_j7q31"]
 
@@ -30,8 +33,9 @@ animations = [{
 texture_filter = 1
 script = ExtResource("1_wbyj6")
 layouts_faceis = Array[ExtResource("2_0ik72")]([ExtResource("4_jamo6")])
-layouts_nedios = Array[ExtResource("2_0ik72")]([ExtResource("4_jamo6")])
-layouts_dificeis = Array[ExtResource("2_0ik72")]([ExtResource("4_jamo6")])
+layouts_medios = Array[ExtResource("2_0ik72")]([ExtResource("4_j7q31")])
+layouts_dificeis = Array[ExtResource("2_0ik72")]([ExtResource("5_i0vtr")])
+inimigo_bonus = ExtResource("6_i0vtr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1932662013]
 position = Vector2(135, 180)
@@ -47,3 +51,9 @@ position = Vector2(0, 30)
 [node name="TimerSpawn" type="Timer" parent="." unique_id=2068324258]
 
 [node name="TimerDisparo" type="Timer" parent="." unique_id=2006083330]
+
+[node name="TimerSpawnJogador" type="Timer" parent="." unique_id=910163027]
+
+[node name="TimerBonus" type="Timer" parent="." unique_id=1020835090]
+
+[node name="TimerBonusMov" type="Timer" parent="." unique_id=340366015]

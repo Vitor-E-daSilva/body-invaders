@@ -8,7 +8,7 @@ size = Vector2(4, 8)
 
 [node name="Projetil" type="Area2D" unique_id=78521927]
 collision_layer = 8
-collision_mask = 21
+collision_mask = 53
 script = ExtResource("1_ot1f0")
 metadata/_custom_type_script = "uid://b15n01ufscgi0"
 

@@ -5,7 +5,7 @@ extends Resource
 @export var formacao_linhas: Array[String] = [
 	"AAAAAAAAAAA",
 	"BBBBBBBBBBB",
-	"BBBBBBBBBBB",   
+	"BBBBBBBBBBB",
 	"VVVVVVVVVVV",  
 	"VVVVVVVVVVV",
 ]

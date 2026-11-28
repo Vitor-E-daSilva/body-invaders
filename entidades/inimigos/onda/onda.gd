@@ -107,7 +107,7 @@ func _parada_tempo_movimento() -> void:
 			max_x = maxf(max_x, inimigo.global_position.x - inimigo.centro_largura)
 			max_y = maxf(max_y, inimigo.global_position.y)
 	
-	#Declara o omvimento e se ele alcançou uma das bordas
+	#Declara o movimento e se ele alcançou uma das bordas
 	var movimento: float = layout.distancia_movimento * _direcao
 	var acertou_direita: bool = _direcao > 0 and (max_x + movimento > margem_direita)
 	var acertou_esquerda: bool = _direcao < 0  and (min_x + movimento < margem_esquerda)
@@ -166,6 +166,8 @@ func _escolher_atirador(atiradores: Array[InimigoBase]) -> InimigoBase:
 func _inimigo_morreu(_inimigo: InimigoBase, _pontos: int, coluna: int, linha: int) -> void:
 	_grid[coluna][linha] = null
 	_inimigos_vivos -= 1
+	if _inimigo == _atirador_anterior:
+		_atirador_anterior = null
 	
 	if _inimigos_vivos <= 0:
 		tempo_movimento.stop()
@@ -174,6 +176,5 @@ func _inimigo_morreu(_inimigo: InimigoBase, _pontos: int, coluna: int, linha: in
 		return
 	
 	adquiriu_pontos.emit(_pontos)
-	print(_pontos)
 	var media_restante: float = float(_inimigos_vivos) / float(_inimigos_iniciais)
 	tempo_movimento.wait_time  = maxf(intervalo_minimo_movimento, layout.intervalo_base_movimento * media_restante)

@@ -6,6 +6,7 @@ extends Area2D
 @export var direcao: Vector2 = Vector2.UP
 @export var dano: int = 1
 @export var destrutivel: bool = false
+@export var durabilidade: int = 1
 
 # Nodes necessarios
 @onready var sprite: Sprite2D = $Sprite2D
@@ -32,10 +33,15 @@ func _acertar_alvo(alvo: Node) -> void:
 		_acertou = true
 		alvo.tomar_dano(dano)
 		queue_free()
+	
+	if alvo.has_method(&"diminuir_durabilidade"):
+		alvo.diminuir_durabilidade(dano)
 
-func tomar_dano(_quantidade: int):
+func diminuir_durabilidade(_quantidade: int):
 	if _acertou or not destrutivel:
 		return
+	durabilidade -= _quantidade
 	
-	_acertou = true
-	queue_free() 
+	if durabilidade <= 0:
+		_acertou = true
+		queue_free()
